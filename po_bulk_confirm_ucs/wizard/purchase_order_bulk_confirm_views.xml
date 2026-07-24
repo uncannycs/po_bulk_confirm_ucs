@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_purchase_order_bulk_confirm_form" model="ir.ui.view">
+        <field name="name">purchase.order.bulk.confirm.form</field>
+        <field name="model">purchase.order.bulk.confirm</field>
+        <field name="arch" type="xml">
+            <form string="Confirm Purchase Orders">
+                <field name="confirmable_count" invisible="1"/>
+                <field name="skipped_count" invisible="1"/>
+                
+                <div class="alert alert-warning" role="alert" invisible="skipped_count == 0">
+                    <i class="fa fa-warning me-2"/>
+                    <strong>Warning:</strong> <field name="skipped_count" class="oe_inline fw-bold"/> selected purchase orders are not in Draft or RFQ Sent state and will be skipped.
+                </div>
+                
+                <div class="alert alert-info" role="alert">
+                    <i class="fa fa-info-circle me-2"/>
+                    <strong>Information:</strong> You are about to confirm <field name="confirmable_count" class="oe_inline fw-bold"/> purchase orders.
+                </div>
+                
+                <group string="Orders to Confirm">
+                    <field name="purchase_order_ids" nolabel="1" colspan="2">
+                        <tree create="false" edit="false" delete="false">
+                            <field name="name" string="Reference"/>
+                            <field name="partner_id" string="Vendor"/>
+                            <field name="date_order" string="Order Date"/>
+                            <field name="user_id" string="Buyer"/>
+                            <field name="amount_total" string="Total"/>
+                            <field name="state" string="Status" widget="badge" decoration-info="state == 'draft'" decoration-warning="state == 'sent'"/>
+                        </tree>
+                    </field>
+                </group>
+                
+                <footer>
+                    <button name="action_confirm_orders" string="Confirm Orders" type="object" class="btn-primary" data-hotkey="q"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_purchase_order_bulk_confirm" model="ir.actions.act_window">
+        <field name="name">Confirm Purchase Orders</field>
+        <field name="res_model">purchase.order.bulk.confirm</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+        <field name="binding_view_types">list</field>
+    </record>
+</odoo>
