@@ -1,5 +1,5 @@
 {
-    'name': 'Purchase Order Bulk Confirm Ucs',
+    'name': 'Purchase Order Bulk Confirmation | Purchase Order Bulk Confirm | Bulk Confirm Purchase Orders | Purchase Order Mass Confirmation | Purchase Order Batch Confirmation | Confirm Multiple Purchase Orders | Bulk Purchase Confirmation',
     'version': '19.0.1.0.0',
     'category': 'Inventory/Purchase',
     'summary': 'Confirm multiple RFQs/Purchase Orders in one click from list view',
